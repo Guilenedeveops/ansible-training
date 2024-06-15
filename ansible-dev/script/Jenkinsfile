@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     def zipFileName = "ansible-playbook-${env.BUILD_ID}.zip"
-                    sshagent (credentials: ['SSH_CREDENTIALS']) {
+                    sshagent (credentials: ['ansible-id']) {
                         sh """
                         scp -o StrictHostKeyChecking=no ${zipFileName} ec2-user@${ANSIBLE_SERVER}:${ANSIBLE_PATH}/
                         ssh -o StrictHostKeyChecking=no ec2-user@${ANSIBLE_SERVER} 'cd ${ANSIBLE_PATH} && unzip -o ${zipFileName}'
