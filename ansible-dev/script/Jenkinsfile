@@ -8,7 +8,7 @@ pipeline {
         ANSIBLE_PATH = '/home/ec2-user/ansible-dev'
         SONARQUBE_URL = 'https://sonarcloud.io/'
         SONARQUBE_ORG = 'guilenedeveops'
-        SONARQUBE_PROJECT_KEY = 'Guilenedeveops_ansible-training 
+        SONARQUBE_PROJECT_KEY = 'Guilenedeveops_ansible-training' 
         SONARQUBE_TOKEN = credentials('sonarcloud-ansible') // Store your SonarCloud token in Jenkins credentials
 
     }
