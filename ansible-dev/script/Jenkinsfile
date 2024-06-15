@@ -22,7 +22,7 @@ pipeline {
                 script {
                     def zipFileName = "ansible-playbook-${env.BUILD_ID}.zip"
                     sh """
-                    curl -uadmin:AP7bxAPKkWrSXTi9tv2SeCxA3Wn -T <PATH_TO_FILE> "http://100.26.227.196:8081/artifactory/ansible-repo/<TARGET_FILE_PATH>"
+                    curl -uadmin:AP7bxAPKkWrSXTi9tv2SeCxA3Wn -T ${zipFileName} "http://100.26.227.196:8081/artifactory/ansible-repo/<${zipFileName}"
                     """
                 }
             }
