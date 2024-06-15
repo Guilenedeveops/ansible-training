@@ -31,7 +31,8 @@ pipeline {
             }
         }
     
-    stages {
+    
+
         stage('Zip Ansible Playbook') {
             steps {
                 script {
@@ -64,14 +65,10 @@ pipeline {
                 }
             }
         }
-    }
+    
 
-       post {
-        always {
-            cleanWs()
-        }
+       
     }
-}
 }
 
 
