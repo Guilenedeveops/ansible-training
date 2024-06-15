@@ -3,7 +3,7 @@ pipeline {
     environment {
         ARTIFACTORY_URL = 'http://100.26.227.196:8081'
         ARTIFACTORY_CREDENTIALS = 'jfrog-id' // Jenkins credentials ID for JFrog./* 
-        ANSIBLE_SERVER = 'ec2-54-87-139-111.compute-1.amazonaws.com'
+        ANSIBLE_SERVER = 'ec2-54-162-197-141.compute-1.amazonaws.com'
         SSH_CREDENTIALS = 'ansible-id' // Jenkins credentials ID for SSH to the Ansible server
         ANSIBLE_PATH = '/home/ec2-user/ansible-dev'
         SONARQUBE_URL = 'https://sonarcloud.io/'
