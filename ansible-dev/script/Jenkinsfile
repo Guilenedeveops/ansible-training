@@ -2,11 +2,36 @@ pipeline {
     agent any
     environment {
         ARTIFACTORY_URL = 'http://100.26.227.196:8081'
-       ARTIFACTORY_CREDENTIALS = 'jfrog-id' // Jenkins credentials ID for JFrog./* 
+        ARTIFACTORY_CREDENTIALS = 'jfrog-id' // Jenkins credentials ID for JFrog./* 
         ANSIBLE_SERVER = 'ec2-54-87-139-111.compute-1.amazonaws.com'
         SSH_CREDENTIALS = 'ansible-id' // Jenkins credentials ID for SSH to the Ansible server
         ANSIBLE_PATH = '/home/ec2-user/ansible-dev'
+        SONARQUBE_URL = 'https://sonarcloud.io/'
+        SONARQUBE_ORG = 'guilenedeveops'
+        SONARQUBE_PROJECT_KEY = 'Guilenedeveops_ansible-training 
+        SONARQUBE_TOKEN = credentials('sonarcloud-ansible') // Store your SonarCloud token in Jenkins credentials
+
     }
+    }
+      stages {
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('Sonarqube') {
+                    script {
+                        def scannerHome = tool 'sonarQube'
+                        sh """
+                            ${scannerHome}/opt/sonar-scanner
+                            -Dsonar.organization=${SONARQUBE_ORG} \
+                            -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=${SONARQUBE_URL} \
+                            -Dsonar.login=${SONARQUBE_TOKEN}
+                        """
+                    }
+                }
+            }
+        }
+    
     stages {
         stage('Zip Ansible Playbook') {
             steps {
@@ -41,9 +66,11 @@ pipeline {
             }
         }
     }
-    post {
+
+       post {
         always {
             cleanWs()
         }
     }
+}
 }
